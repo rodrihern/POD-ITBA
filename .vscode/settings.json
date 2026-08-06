@@ -1,0 +1,7 @@
+{
+  // Al pegar/arrastrar una imagen en un .md, copiarla a ./attachments junto a la nota
+  "markdown.copyFiles.destination": {
+    "**/*.md": "attachments/${fileName}"
+  },
+  "markdown.editor.filePaste.copyIntoWorkspace": "mediaFiles"
+}
