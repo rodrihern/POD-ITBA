@@ -59,7 +59,50 @@ public class SleeperRunnable implements Runnable {
 }
 ```
 
+### Interfaces
 
+tiene 3 interfaces:
+1. Callable
+2. Future
+3. ExecutorService
+
+### Thread pool
+
+Un pool es un numero finito de cosas que puedo tener, por ejemplo una cantidad de conexiones a una db abiertas
+
+`executorService` tiene un pool de threads al que se les va asignando tareas. Esto es para evitar tener que crear threads cada vez
+
+## Sync
+
+Para sincronizar armamos bloques que agarran un lock, todos los objetos de java tiene un mutex
+
+los bloques `synchronized` sobre el mismo lock no corren a la vez y se tratan como operaciones 
+
+se pueden hacer metodos `synchronized`
+
+```java
+public synchronized void addVisit() {
+    visitCount++;
+}
+```
+
+que es lo mismo que envolver a todo el metodo en 
+
+```java
+public void addVisit() {
+    synchronized (this) {
+        visitCount++;
+    }
+}
+```
+
+## Concurrent
+
+Hay una libreria concurrent de java que nos da locks, por ejemplo `ReadWriteLock` para el problema de readers y writers
+
+Tambien hay `AtomicInteger` y otras atomicas con metodos getters y setters atomicos o un `compareAndSet`
+
+Tambien hay `ConcurrentCollections` como `concurrentHashMap` (se pueden usar pero con cuidado y leyendo la documentacion, porque que sea concurrent no quiere decir que todos los metodos sean atomicos/concurrentes. Hay metodos muy utiles)
 
 
 

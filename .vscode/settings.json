@@ -3,5 +3,6 @@
   "markdown.copyFiles.destination": {
     "**/*.md": "attachments/${fileName}"
   },
-  "markdown.editor.filePaste.copyIntoWorkspace": "mediaFiles"
+  "markdown.editor.filePaste.copyIntoWorkspace": "mediaFiles",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
