@@ -104,5 +104,16 @@ Tambien hay `AtomicInteger` y otras atomicas con metodos getters y setters atomi
 
 Tambien hay `ConcurrentCollections` como `concurrentHashMap` (se pueden usar pero con cuidado y leyendo la documentacion, porque que sea concurrent no quiere decir que todos los metodos sean atomicos/concurrentes. Hay metodos muy utiles)
 
+## Liveness
 
+- deadlock
+- livelock: mala suerte infinita de que quedas en un bucle de agarras y soltas locks pero nunca podes acceder al recurso
+- starvation
 
+que todo tenga un timeout por las dudas siempre
+
+## Objetos inmutables
+
+Estan buenos porque no hay que sincronizarlos
+
+para mutarlos
