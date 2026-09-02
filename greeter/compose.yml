@@ -1,0 +1,18 @@
+services:
+  server:
+    container_name: greeter_server
+    image: greeter_server:latest
+    build:
+      context: ./server
+    ports:
+      - "${GRPC_PORT}:${GRPC_PORT}"
+  client:
+    container_name: greeter_client
+    image: greeter_client:latest
+    build:
+      context: ./client
+    profiles: ["client"]
+    depends_on:
+      - server
+    environment:
+      SPRING_GRPC_CLIENT_CHANNELS_LOCAL_ADDRESS: "server:${GRPC_PORT}"

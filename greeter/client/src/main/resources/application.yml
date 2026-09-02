@@ -1,0 +1,12 @@
+spring:
+  grpc:
+    client:
+      channels:
+        local:
+          address: localhost:50051
+        cloud:
+          address: grpc-greeter-demo-server.politesand-c52b2e12.norwayeast.azurecontainerapps.io:443
+          negotiation-type: tls
+logging:
+  level:
+    root: info

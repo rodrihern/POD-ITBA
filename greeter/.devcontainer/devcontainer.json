@@ -1,0 +1,18 @@
+{
+	"name": "grpc-greeter",
+	"image": "mcr.microsoft.com/devcontainers/java:25-jdk-bookworm",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"redhat.java",
+				"vscjava.vscode-java-test",
+				"vscjava.vscode-java-debug",
+				"oracle.oracle-java",
+				"redhat.vscode-yaml"
+			]
+		}
+	}
+}
