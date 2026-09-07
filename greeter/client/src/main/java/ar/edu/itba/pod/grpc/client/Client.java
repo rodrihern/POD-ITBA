@@ -6,6 +6,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.grpc.client.GrpcChannelFactory;
+
+import ar.edu.itba.pod.grpc.GreeterGrpc;
+import ar.edu.itba.pod.grpc.HelloReply;
+import ar.edu.itba.pod.grpc.HelloRequest;
+import ar.edu.itba.pod.grpc.GreeterGrpc.GreeterBlockingStub;
 
 @SpringBootApplication
 public class Client {
@@ -16,10 +22,19 @@ public class Client {
         SpringApplication.run(Client.class, args);
     }
 
+    @Bean 
+    GreeterGrpc.GreeterBlockingStub greeterStub(GrpcChannelFactory channels) {
+        return GreeterGrpc.newBlockingStub(channels.createChannel("local"));
+    }
+
     @Bean
-    CommandLineRunner run() {
+    CommandLineRunner run(GreeterGrpc.GreeterBlockingStub greeter) {
         return _ -> {
-            // TODO
+            var name = "Foo";
+            HelloRequest request = HelloRequest.newBuilder().setName(name).build();
+            HelloReply response = greeter.sayHello(request);
+            log.info("Greeting: {}", response.getMessage());
+
         };
     }
 
