@@ -1,0 +1,12 @@
+spring:
+  grpc:
+    client:
+      channels:
+        local:
+          address: localhost:50051
+          health:
+            enabled: true
+            service-name: users.UserService
+logging:
+  level:
+    root: info
