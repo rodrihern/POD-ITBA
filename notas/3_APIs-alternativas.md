@@ -461,7 +461,16 @@ type Mutation {
 
 ### Hacer una query
 
-El body arranca con la keyword `query`, opcionalmente declara variables, y dice qué método llamar con qué argumentos y **qué campos** espera en la respuesta. Las variables van en un objeto aparte:
+El body arranca con la keyword `query`, opcionalmente declara variables, y dice qué método llamar con qué argumentos y **qué campos** espera en la respuesta.
+
+> [!WARNING] Argumento ≠ variable
+> Los **argumentos** van **siempre** entre paréntesis al lado del campo: `recentPosts(count: ..., offset: ...)`. Lo que cambia es de dónde sale el valor:
+> - **Literal** → el valor va escrito en la query: `recentPosts(count: 2, offset: 0)`.
+> - **Variable** → en el paréntesis va `$count`, la variable se **declara con su tipo** al lado del nombre de la operación, y sus **valores** viajan en un objeto aparte.
+>
+> `count:` es el argumento (definido en el esquema); `$count` es la variable (definida en tu operación). Lo único que va "aparte" son los valores de las variables.
+
+Con variables:
 
 ```graphql
 query myRecentPosts($count: Int, $offset: Int) {
@@ -483,6 +492,18 @@ query myRecentPosts($count: Int, $offset: Int) {
 ```json
 { "count": 2, "offset": 2 }
 ```
+
+Por HTTP, ese objeto aparte es el campo `variables` del body, al lado de `query`:
+
+```json
+{
+  "query": "query myRecentPosts($count: Int, $offset: Int) { recentPosts(count: $count, offset: $offset) { id title } }",
+  "variables": { "count": 2, "offset": 2 }
+}
+```
+
+> [!TIP] Para qué las variables
+> Para probar a mano el literal es más cómodo. En una app se usan variables porque el texto de la query queda **fijo** (no se concatena input del usuario, mismo riesgo que una SQL injection), los tipos se **validan** antes de llegar al resolver, y la query se puede cachear. Misma idea que un `PreparedStatement`. (*Fuente externa*: la cátedra solo muestra la sintaxis.)
 
 Una **mutation** es igual, pero con la keyword `mutation`:
 

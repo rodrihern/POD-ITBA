@@ -4,7 +4,7 @@ schema {
 }
 
 type Query {
-    recentPosts(count: Int, offset: Int): [Post]!
+    recentPosts(count: Int = 10, offset: Int = 0): [Post]!
 }
 
 type Mutation {
