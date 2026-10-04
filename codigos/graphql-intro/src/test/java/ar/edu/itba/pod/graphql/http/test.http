@@ -1,0 +1,58 @@
+### Simple Query over HTTP
+GRAPHQL http://localhost:8080/graphql
+
+query example {
+  recentPosts(count: 5, offset: 1) {
+    author {
+      id
+    }
+  }
+}
+
+### Query with variables
+GRAPHQL http://localhost:8080/graphql
+
+query secondExample($count: Int, $offset: Int) {
+    recentPosts(count: $count, offset: $offset) {
+        id
+        title
+        text
+        category
+        author {
+            id
+        }
+    }
+}
+
+{
+  "count": 5,
+  "offset": 1
+}
+
+### Mutation
+GRAPHQL http://localhost:8080/graphql
+
+mutation thirdExample(
+    $title: String!
+    $text: String!
+    $category: String
+    $authorId: String!) {
+    createPost(
+        title: $title
+        text: $text
+        category: $category
+        authorId: $authorId
+    ) {
+        id
+        title
+        text
+        category
+    }
+}
+
+{
+  "title": "Make your own budget",
+  "text": "Do it at the beggining of the month",
+  "category": "self economy",
+  "authorId": "Author1"
+}

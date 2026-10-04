@@ -1,0 +1,27 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    recentPosts(count: Int, offset: Int): [Post]!
+}
+
+type Mutation {
+    createPost(authorId: String!, category: String, text: String!, title: String!): Post!
+}
+
+type Author {
+    id: ID!
+    name: String!
+    posts: [Post]!
+    thumbnail: String
+}
+
+type Post {
+    author: Author!
+    category: String
+    id: ID!
+    text: String!
+    title: String!
+}
